@@ -1,9 +1,7 @@
 name: Print on external push
 
 # Controls when the action will run. Triggers the workflow on repository_dispatch and filters by type of event (i.e. `event_type`)
-on:
-  repository_dispatch:
-    types: [send_message]
+on: repository_dispatch
 
 jobs:
   build:
