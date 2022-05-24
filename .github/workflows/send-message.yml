@@ -1,7 +1,15 @@
 name: Print on external push
 
 # Controls when the action will run. Triggers the workflow on repository_dispatch and filters by type of event (i.e. `event_type`)
-on: repository_dispatch
+on: 
+  workflow_dispatch:
+      inputs:
+        message:
+          description: 'Log level'     
+          required: true
+          default: 'warning'
+        debug:
+          description: 'Test scenario tags'  
 
 jobs:
   build:
@@ -11,4 +19,4 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
       - name: Print custom message
-        run: echo ${{ github.event.client_payload.message.foo }} # bar
+        run: echo ${{ github.event.inputs.message }}
