@@ -39,6 +39,12 @@ jobs:
         with:
           format: "YYYY-MM-DD_HH-mm"
           utcOffset: "+08:00"
+          
+      - name: print webhook url
+        run: |
+          echo "${{ inputs.webhookUrl }}"
+          echo "${{ inputs }}"
+          
       - name: Send a message to Microsoft Teams [START]
         uses: aliencube/microsoft-teams-actions@v0.8.0
         with:
