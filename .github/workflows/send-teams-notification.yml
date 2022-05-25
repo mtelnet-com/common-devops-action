@@ -2,14 +2,13 @@ name: Print on external push
 
 # Controls when the action will run. Triggers the workflow on repository_dispatch and filters by type of event (i.e. `event_type`)
 on: 
-  workflow_dispatch:
+  workflow_call:
       inputs:
         message:
-          description: 'Log level'     
+          description: 'Log level' 
+          type: string
           required: true
           default: 'warning'
-        debug:
-          description: 'Test scenario tags'  
 
 jobs:
   build:
