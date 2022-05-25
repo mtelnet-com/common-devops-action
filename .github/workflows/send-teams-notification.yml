@@ -4,18 +4,48 @@ name: Print on external push
 on: 
   workflow_call:
       inputs:
-        message:
-          description: 'Log level' 
+        appPlatform:
+          description: 'App Platform' 
           type: string
           required: true
-          default: 'warning'
+        username:
+          description: 'User Name' 
+          type: string
+          required: true
+        branch:
+          description: 'Branch' 
+          type: string
+          required: true
+        statusMessage:
+          description: 'Status Message' 
+          type: string
+          required: true
+        githubRunId:
+          description: 'Github Run Id'
+          type: string
+          required: true
 
 jobs:
-  build:
+  notify-start:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run a one-line script
-        run: echo Hello, world!
-      - name: Print custom message
-        run: echo ${{ github.event.inputs.message }}
+    steps: 
+      - name: Get current time
+        uses: josStorer/get-current-time@v2
+        id: current-time
+        with:
+          format: "YYYY-MM-DD_HH-mm"
+          utcOffset: "+08:00"
+      - name: Send a message to Microsoft Teams [START]
+        uses: aliencube/microsoft-teams-actions@v0.8.0
+        with:
+          webhook_uri: ${{ env.TEAMS_WEBHOOK }}
+          title: "TamJai DevOps"
+          summary: "Build Action triggered At ${{ steps.current-time.outputs.formattedTime }}"
+          text: "Build Action triggered At ${{ steps.current-time.outputs.formattedTime }}"
+          theme_color: "0078D7"
+          sections: '[{ "facts": [{ "name": "App Platform:", "value": "${{ inputs.appPlatform }}" },{ "name": "GitLab Commit User:", "value": "${{ inputs.username }}" },{ "name": "GitLab Branch:", "value": "${{ inputs.branch }}" },{ "name": "Status:", "value": ${{ inputs.statusMessage }} }] }]'
+          actions: '[{ "@type": "OpenUri", "name": "Mtel DevOps", "targets": [{ "os": "default", "uri": "https://github.com/mtelnet-com/tamjai-devops-action/actions/runs/${{ inputs.githubRunId }}" }]}]'
+          
+          
+          
+          
