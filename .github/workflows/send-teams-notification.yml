@@ -47,7 +47,7 @@ jobs:
           summary: "Build Action triggered At ${{ steps.current-time.outputs.formattedTime }}"
           text: "Build Action triggered At ${{ steps.current-time.outputs.formattedTime }}"
           theme_color: "0078D7"
-          sections: '[{ "facts": [{ "name": "App Platform:", "value": "${{ inputs.appPlatform }}" },{ "name": "GitLab Commit User:", "value": "${{ inputs.username }}" },{ "name": "GitLab Branch:", "value": "${{ inputs.branch }}" },{ "name": "Status:", "value": ${{ inputs.statusMessage }} }] }]'
+          sections: '[{ "facts": [{ "name": "App Platform:", "value": "${{ inputs.appPlatform }}" },{ "name": "GitLab Commit User:", "value": "${{ inputs.username }}" },{ "name": "GitLab Branch:", "value": "${{ inputs.branch }}" },{ "name": "Status:", "value": "${{ inputs.statusMessage }}" }] }]'
           actions: '[{ "@type": "OpenUri", "name": "Mtel DevOps", "targets": [{ "os": "default", "uri": "https://github.com/mtelnet-com/tamjai-devops-action/actions/runs/${{ inputs.githubRunId }}" }]}]'
           
           
