@@ -24,9 +24,9 @@ on:
           description: 'Github Run Id'
           type: string
           required: true
+      secrets:
         webhookUrl:
           description: 'webhook Url'
-          type: string
           required: true
 
 jobs:
@@ -42,14 +42,14 @@ jobs:
           
       - name: print webhook url
         run: |
-          echo "${{ inputs.webhookUrl }}"
+          echo "${{ secrets.webhookUrl }}"
           echo "${{ inputs.githubRunId }}"
           echo "${{ inputs }}"
           
       - name: Send a message to Microsoft Teams [START]
         uses: aliencube/microsoft-teams-actions@v0.8.0
         with:
-          webhook_uri: ${{ inputs.webhookUrl }}
+          webhook_uri: ${{ secrets.webhookUrl }}
           title: "TamJai DevOps"
           summary: "Build Action triggered At ${{ steps.current-time.outputs.formattedTime }}"
           text: "Build Action triggered At ${{ steps.current-time.outputs.formattedTime }}"
