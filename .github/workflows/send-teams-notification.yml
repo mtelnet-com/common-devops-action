@@ -24,6 +24,10 @@ on:
           description: 'Github Run Id'
           type: string
           required: true
+        webhookUrl:
+          description: 'webhook Url'
+          type: string
+          required: true
 
 jobs:
   notify-start:
@@ -38,7 +42,7 @@ jobs:
       - name: Send a message to Microsoft Teams [START]
         uses: aliencube/microsoft-teams-actions@v0.8.0
         with:
-          webhook_uri: ${{ env.TEAMS_WEBHOOK }}
+          webhook_uri: ${{ inputs.webhookUrl }}
           title: "TamJai DevOps"
           summary: "Build Action triggered At ${{ steps.current-time.outputs.formattedTime }}"
           text: "Build Action triggered At ${{ steps.current-time.outputs.formattedTime }}"
