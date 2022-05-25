@@ -34,7 +34,7 @@ on:
           required: true
 
 jobs:
-  notify-start:
+  send-teams-message:
     runs-on: ubuntu-latest
     steps: 
       - name: Get current time
