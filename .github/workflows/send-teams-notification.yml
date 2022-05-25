@@ -43,6 +43,7 @@ jobs:
       - name: print webhook url
         run: |
           echo "${{ inputs.webhookUrl }}"
+          echo "${{ inputs.githubRunId }}"
           echo "${{ inputs }}"
           
       - name: Send a message to Microsoft Teams [START]
