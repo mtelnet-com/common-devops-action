@@ -11,6 +11,13 @@ on:
           description: 'environment'
           type: string
           required: true
+        platform:
+          description: 'platform'
+          type: string
+          required: true
+        scheme:
+          type: string
+          required: true
     secrets:
         git-path: 
           description: 'Git Path'
@@ -26,7 +33,12 @@ on:
           required: true
         ios-provision-pwd:
           description: 'ios-provision password'
-        
+        app-id:
+          required: true
+        api-key:
+          required: true
+        install-pwd:
+          required: true
     
 jobs:
   build:
@@ -90,28 +102,28 @@ jobs:
         
         pod deintegrate
         pod install
-        OUTPUT_NAME="TamJai_IOS_1.0.0_${{ steps.current-time.outputs.formattedTime }}_${GITHUB_SHA}"
+        OUTPUT_NAME="${{ inputs.scheme }}_IOS_1.0.0_${{ steps.current-time.outputs.formattedTime }}_${GITHUB_SHA}"
         echo $OUTPUT_NAME
         fastlane gym --export_method ad-hoc --output_name $OUTPUT_NAME
         ls -ltr ./build
     
-#     - name: Run Fastlane   
-#       run: | 
-#         DIR=$(pwd)
-#         IPAPATH=$DIR"/build/"$(ls ./build | grep 'ipa')
-#         echo $IPAPATH
-#         VERSION=$(ls ./build | grep 'ipa' | sed 's/\(.*\).ipa/\1/g')
-#         echo 'Version:' + $VERSION
-#         echo 'IPA PATH:' $IPAPATH
-#         echo 'Upload IPA to Appspack...'
-#         fastlane upload_appspack \
-#         env:$ENVIRONMENT \
-#         version:$VERSION \
-#         filepath:$IPAPATH \
-#         app_id:$APP_ID \
-#         api_key:$API_KEY \
-#         title:$VERSION \
-#         description:$VERSION  \
-#         tags:$ENV_TAG,$APP_PLATFORM \
-#         install_remarks:$VERSION  \
-#         install_pwd:$INSTALL_PASSWORD
+    - name: Upload to Appspack   
+      run: | 
+        DIR=$(pwd)
+        IPAPATH=$DIR"/build/"$(ls ./build | grep 'ipa')
+        echo $IPAPATH
+        VERSION=$(ls ./build | grep 'ipa' | sed 's/\(.*\).ipa/\1/g')
+        echo 'Version:' + $VERSION
+        echo 'IPA PATH:' $IPAPATH
+        echo 'Upload IPA to Appspack...'
+        fastlane upload_appspack \
+        env:${{ inputs.environment }} \
+        version:$VERSION \
+        filepath:$IPAPATH \
+        app_id:${{ secrets.app-id }} \
+        api_key:${{ secrets.api-key }} \
+        title:$VERSION \
+        description:$VERSION  \
+        tags:${{ inputs.environment }},${{ inputs.platform }} \
+        install_remarks:$VERSION  \
+        install_pwd:${{ secrets.install-pwd }}
