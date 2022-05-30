@@ -36,5 +36,5 @@ jobs:
     - name: Update Jira
       uses: atlassian/gajira-transition@master
       with:
-          issue: ${{ input.jira-numbers }}
-          transition: ${{ input.jira-transition }}
+          issue: ${{ inputs.jira-numbers }}
+          transition: ${{ inputs.jira-transition }}
