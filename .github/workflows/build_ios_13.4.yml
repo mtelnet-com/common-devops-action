@@ -104,6 +104,7 @@ jobs:
         pod install
         OUTPUT_NAME="${{ inputs.scheme }}_IOS_1.0.0_${{ steps.current-time.outputs.formattedTime }}_${GITHUB_SHA}"
         echo $OUTPUT_NAME
+        ls -lur ./fastlane
         fastlane gym --export_method ad-hoc --output_name $OUTPUT_NAME
         ls -ltr ./build
     
