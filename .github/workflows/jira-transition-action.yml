@@ -24,6 +24,7 @@ on:
 
 jobs:
   jira-transition:
+    if: always() && (inputs.jira-numbers != '[]')
     runs-on: ubuntu-latest
     continue-on-error: true
     name: JIRA Transition
