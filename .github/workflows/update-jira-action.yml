@@ -6,7 +6,11 @@ on:
         jira-numbers:
           description: 'Jira Numbers' 
           type: string
-          required: false
+          required: true
+        jira-transition:
+          description: 'Jira Transition' 
+          type: string
+          required: true
       secrets:
         jira-api-token:
           description: 'JIRA API Token'
@@ -32,5 +36,5 @@ jobs:
     - name: Update Jira
       uses: atlassian/gajira-transition@master
       with:
-          issue: TJSGI-1732
-          transition: "To fix"
+          issue: ${{ input.jira-numbers }}
+          transition: ${{ input.jira-transition }}
