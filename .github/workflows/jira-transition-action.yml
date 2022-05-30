@@ -23,9 +23,12 @@ on:
           required: true
 
 jobs:
-  send-teams-message:
+  jira-transition:
     runs-on: ubuntu-latest
-    name: Jira Login
+    name: JIRA Transition
+    strategy:
+      matrix:
+        value: ${{fromJson(inputs.jira-numbers)}}
     steps:
     - name: Login
       uses: atlassian/gajira-login@master
@@ -36,5 +39,5 @@ jobs:
     - name: Update Jira
       uses: atlassian/gajira-transition@master
       with:
-          issue: ${{ inputs.jira-numbers }}
+          issue: ${{ matrix.value }}
           transition: ${{ inputs.jira-transition }}
