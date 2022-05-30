@@ -25,6 +25,7 @@ on:
 jobs:
   jira-transition:
     runs-on: ubuntu-latest
+    continue-on-error: true
     name: JIRA Transition
     strategy:
       matrix:
