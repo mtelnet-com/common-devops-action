@@ -1,4 +1,4 @@
-name: Update Jira Action
+name: Jira Transition Action
 
 on: 
   workflow_call:
