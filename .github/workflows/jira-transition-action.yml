@@ -46,10 +46,3 @@ jobs:
       with:
           issue: ${{ matrix.jira-number }}
           transition: ${{ inputs.jira-transition }}
-          
-  end:
-    needs: jira-transition
-    runs-on: ubuntu-latest
-    steps:
-      - name: end
-        run: echo 'the end'
