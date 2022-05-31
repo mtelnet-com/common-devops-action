@@ -7,7 +7,7 @@ on:
           description: 'Jira Numbers' 
           type: string
           required: true
-        jira-transition:
+        jira-transitions:
           description: 'Jira Transition' 
           type: string
           required: true
@@ -39,10 +39,14 @@ jobs:
         JIRA_USER_EMAIL: ${{ secrets.jira-user-email }}
         JIRA_API_TOKEN: ${{ secrets.jira-api-token }}
     - name: Update Jira
+      continue-on-error: true
+      strategy:
+      matrix:
+        transition: ${{ fromJson(inputs.jira-transitions) }}
       uses: atlassian/gajira-transition@master
       with:
           issue: ${{ matrix.value }}
-          transition: ${{ inputs.jira-transition }}
+          transition: ${{ matrix.transition }}
           
   end:
     needs: jira-transition
