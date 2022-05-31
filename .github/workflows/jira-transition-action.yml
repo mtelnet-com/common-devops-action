@@ -7,7 +7,7 @@ on:
           description: 'Jira Numbers' 
           type: string
           required: true
-        jira-transitions:
+        jira-transition:
           description: 'Jira Transition' 
           type: string
           required: true
@@ -31,7 +31,6 @@ jobs:
     strategy:
       matrix:
         jira-number: ${{ fromJson(inputs.jira-numbers) }}
-        transition: ${{ fromJson(inputs.jira-transitions) }}
     steps:
 
     - name: Login
@@ -46,7 +45,7 @@ jobs:
       uses: atlassian/gajira-transition@master
       with:
           issue: ${{ matrix.jira-number }}
-          transition: ${{ matrix.transition }}
+          transition: ${{ inputs.jira-transition }}
           
   end:
     needs: jira-transition
