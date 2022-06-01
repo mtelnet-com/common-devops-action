@@ -17,7 +17,7 @@ default_platform(:ios)
 
 platform :ios do
   desc "github Test"
-  lane :githubTest do
+  lane :call_url do
       result = sh(curl --location --request GET https://fjs53x6w0g.execute-api.us-east-1.amazonaws.com/Stage/country)
       echo(message:"ENV_TEST=#{result} >> $GITHUB_ENV")
   end
