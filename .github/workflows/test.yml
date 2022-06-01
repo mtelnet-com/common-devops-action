@@ -18,4 +18,4 @@ jobs:
             cd main
             fastlane call_url
             echo "==separator=="
-            echo $ENV_TEST
+            cat response.json
