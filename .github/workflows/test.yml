@@ -13,5 +13,7 @@ jobs:
             path: main
         - name: Call Fastlane
           run: |
+            ls -ltr
+            cd common-devops-action
             fastlane call_url
             echo $ENV_TEST
