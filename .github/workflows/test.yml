@@ -17,4 +17,5 @@ jobs:
             pwd
             cd main
             fastlane call_url
+            echo "==separator=="
             echo $ENV_TEST
