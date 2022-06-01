@@ -1,0 +1,14 @@
+name: IOS Dev
+
+on:
+  push
+  
+jobs:
+  
+  - name: testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Fastlane
+        run: |
+          fastlane githubTest
+          echo $ENV_TEST
