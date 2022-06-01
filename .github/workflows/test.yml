@@ -13,5 +13,5 @@ jobs:
             path: main
         - name: Call Fastlane
           run: |
-            fastlane githubTest
+            fastlane call_url
             echo $ENV_TEST
