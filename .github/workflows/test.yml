@@ -1,14 +1,17 @@
 name: IOS Dev
 
-on:
-  push
+on: push
   
 jobs:
-  
-  - name: testing
+  testing:
+    name: testing
     runs-on: ubuntu-latest
     steps:
-      - name: Call Fastlane
-        run: |
-          fastlane githubTest
-          echo $ENV_TEST
+        - name: Checkout
+          uses: actions/checkout@v3
+          with:
+            path: main
+        - name: Call Fastlane
+          run: |
+            fastlane githubTest
+            echo $ENV_TEST
