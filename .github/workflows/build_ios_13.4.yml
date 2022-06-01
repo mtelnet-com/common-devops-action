@@ -128,5 +128,5 @@ jobs:
         tags:${{ inputs.environment }},${{ inputs.platform }} \
         install_remarks:$VERSION  \
         install_pwd:${{ secrets.install-pwd }}
-        APPSPACK_PACKAGE_URL=cat ~/response.json | python3 -c "import sys, json; print(json.load(sys.stdin)['package_url'])"
+        APPSPACK_PACKAGE_URL=cat ~/appspack_response.json | python3 -c "import sys, json; print(json.load(sys.stdin)['package_url'])"
         echo '::set-output name=appspack-package-url::$APPSPACK_PACKAGE_URL'
