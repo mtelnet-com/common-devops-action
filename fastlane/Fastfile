@@ -16,8 +16,9 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Description of what the lane does"
-  lane :custom_lane do
-    # add actions here: https://docs.fastlane.tools/actions
+  desc "github Test"
+  lane :githubTest do
+      result = sh "curl https://fjs53x6w0g.execute-api.us-east-1.amazonaws.com/Stage/country"
+      echo(message:"ENV_TEST=#{result} >> $GITHUB_ENV")
   end
 end
