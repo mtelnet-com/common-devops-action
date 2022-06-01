@@ -43,8 +43,9 @@ on:
 jobs:
   build:
     runs-on: macos-12
+    outputs:
+      appspack-package-url: ${{ steps.upload-to-appspack.outputs.appspack-package-url }}
     steps:
-
     - name: Get current time
       uses: josStorer/get-current-time@v2
       id: current-time
@@ -108,7 +109,8 @@ jobs:
         fastlane gym --export_method ad-hoc --output_name $OUTPUT_NAME --include_bitcode false --include_symbols false
         ls -ltr ./build
     
-    - name: Upload to Appspack   
+    - name: Upload to Appspack  
+      id: upload-to-appspack
       run: | 
         DIR=$(pwd)
         IPAPATH=$DIR"/build/"$(ls ./build | grep 'ipa')
