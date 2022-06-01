@@ -18,4 +18,4 @@ jobs:
             cd main
             fastlane call_url
             echo "==separator=="
-            cat ~/response.json
+            cat ~/response.json | python3 -c "import sys, json; print(json.load(sys.stdin)['countries'])"
