@@ -4,10 +4,6 @@ name: Print on external push
 on: 
   workflow_call:
       inputs:
-        action:
-          description: 'Action' 
-          type: string
-          required: true
         appPlatform:
           description: 'App Platform' 
           type: string
@@ -31,6 +27,9 @@ on:
       secrets:
         webhookUrl:
           description: 'webhook Url'
+          required: true
+        action:
+          description: 'Action' 
           required: true
 
 jobs:
@@ -59,5 +58,5 @@ jobs:
           text: "Action triggered At ${{ steps.current-time.outputs.formattedTime }}"
           theme_color: "0078D7"
           sections: '[{ "facts": [{ "name": "App Platform:", "value": "${{ inputs.appPlatform }}" },{ "name": "GitLab Commit User:", "value": "${{ inputs.username }}" },{ "name": "GitLab Branch:", "value": "${{ inputs.branch }}" },{ "name": "Status:", "value": "${{ inputs.statusMessage }}" }] }]'
-          actions: ${{ inputs.action }}
+          actions: ${{ secrets.action }}
           
